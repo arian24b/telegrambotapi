@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+./telegram-bot-api --api-id=123456 --api-hash=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA --http-port=5687 --dir=./ --local
