@@ -1,4 +1,4 @@
-start_bot.sh.example
+start_bot.sh
 tqueue.binlog
 webhooks_db.binlog
 
