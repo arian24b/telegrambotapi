@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-WORKDIR /tbotapi
+WORKDIR /telegrambotapi
 
 RUN apt-get update \
     && apt-get -y upgrade \
@@ -14,9 +14,9 @@ RUN git clone --recursive https://github.com/tdlib/telegram-bot-api.git \
     && cd build \
     && CXXFLAGS="-stdlib=libc++" CC=/usr/bin/clang-14 CXX=/usr/bin/clang++-14 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local .. \
     && cmake --build . --target install \
-    && cd /tbotapi
+    && cd /telegrambotapi
 
-#COPY ./telegram-bot-api /tbotapi/telegram-bot-api
+#COPY ./telegram-bot-api /telegrambotapi/telegram-bot-api
 
 #RUN chmod +x /telegram-bot-api
 

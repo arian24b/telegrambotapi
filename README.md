@@ -1,4 +1,4 @@
-# tbotapi
+# telegrambotapi
 telegram bot api
 for use this, just run command:
 
