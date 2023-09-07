@@ -11,4 +11,4 @@ APIHASH=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 HTTPPORT=5687
 TEMPDIR=$(mktemp -d)
 
-./telegram-bot-api --api-id=$APIID --api-hash=$APIHASH --http-port=$HTTPPORT --dir=$TEMPDIR --temp-dir=$TEMPDIR --local
+/home/arian/backup/telegram-bot-api --api-id=$APIID --api-hash=$APIHASH --http-port=$HTTPPORT --dir=$TEMPDIR --temp-dir=$TEMPDIR --local
