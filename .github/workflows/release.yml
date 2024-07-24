@@ -17,7 +17,7 @@ jobs:
       run: sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install -y make git zlib1g-dev libssl-dev gperf cmake clang-14 libc++-14-dev libc++abi-14-dev
 
     - name: Remove old telegram-bot-api
-    - run: rm -rf telegram-bot-api
+      run: rm -rf telegram-bot-api
 
     - name: Clone telegram-bot-api repository
       run: git clone --recursive https://github.com/tdlib/telegram-bot-api.git
