@@ -1,0 +1,41 @@
+name: Build and Release Telegram Bot API
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up dependencies
+      run: sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install -y make git zlib1g-dev libssl-dev gperf cmake clang-14 libc++-14-dev libc++abi-14-dev
+
+    - name: Clone telegram-bot-api repository
+      run: git clone --recursive https://github.com/tdlib/telegram-bot-api.git
+
+    - name: Build telegram-bot-api
+      run: |
+        cd telegram-bot-api
+        rm -rf build
+        mkdir build
+        cd build
+        CXXFLAGS="-stdlib=libc++" CC=/usr/bin/clang-14 CXX=/usr/bin/clang++-14 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=.. ..
+        cmake --build . --target install
+        cd ../..
+        tar -czvf telegram-bot-api.tar.gz telegram-bot-api/bin/telegram-bot-api*
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./telegram-bot-api.tar.gz
+        asset_name: telegram-bot-api.tar.gz
+        asset_content_type: application/gzip
