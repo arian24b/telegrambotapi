@@ -14,7 +14,7 @@ or
 ```python
 nano run_telegram_bot_api.py   and replace your api keys
 
-python3 run_telegram_bot_api.sh &
+python3 run_telegram_bot_api.py &
 ```
 ---
 
