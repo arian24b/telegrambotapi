@@ -9,25 +9,25 @@ from os import rmdir
 
 
 # Configuration
-API_ID = '123456'
-API_HASH = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
-HTTP_PORT = '5687'
+API_ID = "123456"
+API_HASH = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+HTTP_PORT = "5687"
 
 # Create a temporary directory
 temp_dir = mkdtemp(prefix="telegram-bot-api-")
 
 # Path to the telegram-bot-api binary
-telegram_bot_api_binary = '/home/arian/backup/telegram-bot-api'
+telegram_bot_api_binary = "/home/arian/backup/telegram-bot-api"
 
 # Arguments to pass to the telegram-bot-api binary
 args = [
     telegram_bot_api_binary,
-    f'--api-id={API_ID}',
-    f'--api-hash={API_HASH}',
-    f'--http-port={HTTP_PORT}',
-    f'--dir={temp_dir}',
-    f'--temp-dir={temp_dir}',
-    '--local'
+    f"--api-id={API_ID}",
+    f"--api-hash={API_HASH}",
+    f"--http-port={HTTP_PORT}",
+    f"--dir={temp_dir}",
+    f"--temp-dir={temp_dir}",
+    "--local",
 ]
 
 # Execute the telegram-bot-api binary with the specified arguments
