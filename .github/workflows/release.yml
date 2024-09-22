@@ -1,12 +1,9 @@
 name: Build and Release Telegram Bot API
 
-# on:
-#   push:
-#     tags:
-#       - 'v*'
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   build:
@@ -17,7 +14,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up dependencies
-        run: sudo apt-get update;sudo apt-get upgrade;sudo apt-get install make git zlib1g-dev libssl-dev gperf cmake clang-14 libc++-14-dev libc++abi-14-dev
+        run: sudo apt-get update;sudo apt-get install make git zlib1g-dev libssl-dev gperf cmake clang-14 libc++-14-dev libc++abi-14-dev
 
       - name: Remove old telegram-bot-api
         run: rm -rf telegram-bot-api
@@ -29,7 +26,7 @@ jobs:
         run: |
           cd telegram-bot-api
           rm -rf build
-          mkdir build
+          mkdir -p build
           cd build
           CXXFLAGS="-stdlib=libc++" CC=/usr/bin/clang-14 CXX=/usr/bin/clang++-14 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=.. ..
           cmake --build . --target install

@@ -12,12 +12,11 @@ from os import rmdir
 API_ID = "123456"
 API_HASH = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 HTTP_PORT = "5687"
+telegram_bot_api_binary = "/path/to/telegram-bot-api"
 
 # Create a temporary directory
 temp_dir = mkdtemp(prefix="telegram-bot-api-")
 
-# Path to the telegram-bot-api binary
-telegram_bot_api_binary = "/home/arian/backup/telegram-bot-api"
 
 # Arguments to pass to the telegram-bot-api binary
 args = [
