@@ -39,3 +39,23 @@ jobs:
       - name: Verify build
         run: |
           ls -l /usr/local/bin/telegram-bot-api*
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: Release v1.0.${{ github.run_number }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: success()
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: /usr/local/bin/telegram-bot-api*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: success()
