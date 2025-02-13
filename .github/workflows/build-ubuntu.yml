@@ -1,0 +1,38 @@
+name: Build Telegram Bot API Server on Ubuntu 22
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get upgrade -y
+          sudo apt-get install -y make git zlib1g-dev libssl-dev gperf cmake clang
+
+      - name: Clone Telegram Bot API repository
+        run: git clone --recursive https://github.com/tdlib/telegram-bot-api.git
+
+      - name: Build Telegram Bot API
+        run: |
+          cd telegram-bot-api
+          mkdir build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local ..
+          cmake --build . --target install
+
+      - name: Verify build
+        run: |
+          ls -l /usr/local/bin/telegram-bot-api*

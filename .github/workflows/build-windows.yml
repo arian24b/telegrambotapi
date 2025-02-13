@@ -1,0 +1,43 @@
+name: Build Telegram Bot API Server on Windows
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Visual Studio
+        run: |
+          choco install visualstudio2019community --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64"
+          choco install cmake
+
+      - name: Install dependencies
+        run: |
+          choco install git
+          choco install cmake
+          choco install openssl
+
+      - name: Clone Telegram Bot API repository
+        run: git clone --recursive https://github.com/tdlib/telegram-bot-api.git
+
+      - name: Build Telegram Bot API
+        run: |
+          cd telegram-bot-api
+          mkdir build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=C:\telegram-bot-api ..
+          cmake --build . --target install
+
+      - name: Verify build
+        run: |
+          dir C:\telegram-bot-api\bin\telegram-bot-api*
